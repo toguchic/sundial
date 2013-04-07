@@ -1,7 +1,9 @@
 package sundial;
 
+
+//TEST GIT UPDATE
 public class gnomon {
-  public gnomon(){
+	public gnomon(){
 		/*
 		 * Equation
 		 * c
