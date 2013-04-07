@@ -1,3 +1,8 @@
+/*****
+Sends a print job to printer
+
+***/
+
 import java.awt.*;
 import javax.print.*;
 import javax.swing.ImageIcon;
