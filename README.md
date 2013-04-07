@@ -1,19 +1,18 @@
 -------------------------------------------------------------------------------
-Project Name
+Sundial Project
 -------------------------------------------------------------------------------
-Version X.XXX
-Release date: MM/DD/YYYY
+Version 1.0
+Release date: 4/30/2013
 -------------------------------------------------------------------------------
 Project state:
-prototype | expermental | beta | stable | production
+Beta
 -------------------------------------------------------------------------------
 Credits
-  Author one (author contact info)
-	Author two (author contact info)
+  Chriselle Toguchi
+  Matt Kanda
+  Samuel Kim
 -------------------------------------------------------------------------------
-Project description
-
-Describe the point of the project here.
+Sundial simulation in Java
 -------------------------------------------------------------------------------
 Dependencies:
 
