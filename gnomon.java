@@ -14,41 +14,55 @@ public class gnomon {
 		 * 
 		 * 12 noon is 180* of arc
 		 */
-		
-		//double d = 0;
-		//double t = 9;
-		//double phi = 11;
-		
-		//d = Math.tan(t) * Math.sin(phi);
-		//d = Math.tan(d);
-		
-		//System.out.println(d);
-		
-		System.out.println(calculateArc(0,4));
 	}
 	
+	
+	/*
+	 * Takes in latitude, hour, and minutes and returns the angle 
+	 * of the hour line with respect to the gnomon
+	 * 
+	 * @param lat latitude of the place the sundial is located
+	 * @param h   hour
+	 * @param m   minute
+	 * @return    angle of hour line
+	 */
+	public double calculate(int lat, int h, int m){
+		double d = Math.tan(calculateArc(h,m) - 180) * Math.sin(lat);
+		d = Math.tan(d);
+		
+		return d;
+	}
+	
+	/*
+	 * Converts the time to all minutes to be converted to arc
+	 * @param h hour
+	 * @param m minute
+	 * @return arc
+	 */
 	private double calculateArc(int h, int m){
 		int convertToMin = h * 60;
 		m = m + convertToMin;
 		return minToDegree(m);
 	}
 	
-	private double hourToDegree(double h){
+	
+	
+	public double hourToDegree(double h){
 		double htd = h * 15;
 		return htd;
 	}
 	
-	private double minToDegree(double m){
+	public double minToDegree(double m){
 		double mtd = m / 4;
 		return mtd;
 	}
 	
-	private double minToFt(double m){
+	public double minToFt(double m){
 		double mtf = m * 15;
 		return mtf;
 	}
 	
-	private double secToFt(double s){
+	public double secToFt(double s){
 		double stf = s / 4;
 		return stf;
 	}
