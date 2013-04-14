@@ -1,0 +1,88 @@
+/********
+GUI for input of Date, Longitude, and Latitude
+Source: http://www.dreamincode.net/forums/topic/17705-basic-gui-concepts/
+*********/
+
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+
+public class Gui extends JFrame
+{
+  private static final int WIDTH = 400;
+	private static final int HEIGHT = 200;
+	
+	private JLabel dateL, latL, longL;
+	private JTextField dateTF, latTF, longTF;
+	private JButton submitB, exitB;
+	
+	
+	//Button handlers:
+	private SubmitButtonHandler sbHandler;
+	private ExitButtonHandler ebHandler;
+	
+	public Gui()
+	{
+		dateL = new JLabel("Date: ", SwingConstants.CENTER);
+		latL = new JLabel("Latitude: ", SwingConstants.CENTER);
+		longL = new JLabel("Longitude: ", SwingConstants.CENTER);
+		
+		dateTF = new JTextField(10);
+		latTF = new JTextField(10);
+		longTF = new JTextField(10);
+		
+		//SPecify handlers for each button and add (register) ActionListeners to each button.
+		submitB = new JButton("Submit");
+		sbHandler = new SubmitButtonHandler();
+		submitB.addActionListener(sbHandler);
+		exitB = new JButton("Exit");
+		ebHandler = new ExitButtonHandler();
+		exitB.addActionListener(ebHandler);
+		
+		setTitle("Sundial Input");
+		Container pane = getContentPane();
+		pane.setLayout(new GridLayout(4, 2));
+		
+		//Add things to the pane in the order you want them to appear (left to right, top to bottom)
+		pane.add(dateL);
+		pane.add(latTF);
+		pane.add(longL);
+		pane.add(dateTF);
+		pane.add(latL);
+		pane.add(longTF);
+		pane.add(submitB);
+		pane.add(exitB);
+		
+		setSize(WIDTH, HEIGHT);
+		setVisible(true);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	}
+	
+	private class SubmitButtonHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			double width, length, area;
+			
+			length = Double.parseDouble(dateTF.getText()); //We use the getText & setText methods to manipulate the data entered into those fields.
+			width = Double.parseDouble(latTF.getText());
+			area = length * width;
+			
+			longTF.setText("" + area);
+		}
+	}
+	
+	public class ExitButtonHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			System.exit(0);
+		}
+	}
+	
+	public static void main(String[] args)
+	{
+		Gui rectObj = new Gui();
+	}
+	
+}
