@@ -8,9 +8,7 @@ Project state:
 Beta
 -------------------------------------------------------------------------------
 Credits
-  Chriselle Toguchi
-  Matt Kanda
-  Samuel Kim
+  Chriselle Toguchi Matt Kanda Samuel Kim
 -------------------------------------------------------------------------------
 Sundial simulation in Java
 -------------------------------------------------------------------------------
