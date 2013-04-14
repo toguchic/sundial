@@ -45,11 +45,11 @@ public class Gui extends JFrame
 		
 		//Add things to the pane in the order you want them to appear (left to right, top to bottom)
 		pane.add(dateL);
-		pane.add(latTF);
-		pane.add(longL);
 		pane.add(dateTF);
-		pane.add(latL);
+		pane.add(longL);
 		pane.add(longTF);
+		pane.add(latL);
+		pane.add(latTF);
 		pane.add(submitB);
 		pane.add(exitB);
 		
@@ -58,17 +58,21 @@ public class Gui extends JFrame
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
+	//Where input will be used to calculate time. 
 	private class SubmitButtonHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			double width, length, area;
+			double longitude, latitude, date;
 			
-			length = Double.parseDouble(dateTF.getText()); //We use the getText & setText methods to manipulate the data entered into those fields.
-			width = Double.parseDouble(latTF.getText());
-			area = length * width;
+			longitude = Double.parseDouble(longTF.getText()); //We use the getText & setText methods to manipulate the data entered into those fields.
+			latitude = Double.parseDouble(latTF.getText());
+			//date = Integer.parseInt(dateTF.getText());
 			
-			longTF.setText("" + area);
+			//This is temporary until other codes are finished
+			date = longitude * latitude;
+			dateTF.setText("" + date);
+		
 		}
 	}
 	
