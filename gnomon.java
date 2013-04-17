@@ -32,36 +32,19 @@ public class gnomon {
 		System.out.println("Math.tan is reporting     -> " + Math.tan(Math.toRadians(calculateArc(h,m))));
 		System.out.println("Math.sin is reporting     -> " + Math.sin(Math.toRadians(lat)));
 		double radians = Math.atan(d);
-		double degree = degreeConvert(radians);
+		double degree = Math.toDegrees(radians);
 		return degree;
 		
 		
 	}
 	
-//	public double calculate(double lat, int h, int m){
-//		double d = Math.tan(h(h,m)) * Math.sin(lat);
-//		d = Math.atan(d);
-//		
-//		return d;
-//	}
-	
-//	public double h(double h, double m){
-//		m = m / 60;
-//		h = h + m;
-//		
-//		double hla = (h - 12) * 15;
-//		return hla;
-//	}
+
 	/*
 	 * Converts the time to all minutes to be converted to arc
 	 * @param h hour
 	 * @param m minute
 	 * @return arc
 	 */
-	private double degreeConvert(double radians){
-		double degree = radians * (180/3.14);
-		return degree;
-	}
 	
 	private double calculateArc(int h, int m){
 		int convertToMin = h * 60;
