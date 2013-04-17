@@ -49,7 +49,7 @@ public class gnomon {
 	private double calculateArc(int h, int m){
 		int convertToMin = h * 60;
 		m = m + convertToMin;
-		return minToDegree(m);
+		return 180 - minToDegree(m);
 	}
 	
 	
