@@ -1,8 +1,10 @@
-package sundial;
-
+import java.util.*;
 
 //TEST GIT UPDATE
 public class gnomon {
+	
+	double [] degreeArray = new double [7];
+	
 	public gnomon(){
 		/*
 		 * Equation
@@ -16,6 +18,20 @@ public class gnomon {
 		 */
 	}
 	
+	/*
+	 *  Takes in a latitude, and returns an array with degrees from 6 to 12 oclock
+	 *  
+	 *  @param lat latitude of the place the sundial is located
+	 *  @param lng longitude of the place the sundial is located to calculate time correction
+	 *  @return double array of degrees
+	 */
+	public double [] calculateTime(double lat, double lng){
+		for(int h = 6; h <= 12; h++){
+			degreeArray[h-6] = calculate(lat, h , 0);
+		}
+		
+		return degreeArray;
+	}
 	
 	/*
 	 * Takes in latitude, hour, and minutes and returns the angle 
@@ -26,16 +42,14 @@ public class gnomon {
 	 * @param m   minute
 	 * @return    angle of hour line
 	 */
-	public double calculate(double lat, int h, int m){
+	private double calculate(double lat, int h, int m){
 		double d = Math.tan(Math.toRadians(calculateArc(h,m))) * Math.sin(Math.toRadians(lat));
-		System.out.println("calculateArc is reporting -> " + calculateArc(h,m));
-		System.out.println("Math.tan is reporting     -> " + Math.tan(Math.toRadians(calculateArc(h,m))));
-		System.out.println("Math.sin is reporting     -> " + Math.sin(Math.toRadians(lat)));
+	//	System.out.println("calculateArc is reporting -> " + calculateArc(h,m));
+	//	System.out.println("Math.tan is reporting     -> " + Math.tan(Math.toRadians(calculateArc(h,m))));
+	//	System.out.println("Math.sin is reporting     -> " + Math.sin(Math.toRadians(lat)));
 		double radians = Math.atan(d);
 		double degree = Math.toDegrees(radians);
 		return degree;
-		
-		
 	}
 	
 
@@ -53,7 +67,16 @@ public class gnomon {
 	}
 	
 	
+	private double LongitudeCorrection(double lng){
+		double correctedLong = 90 - lng;
+		return correctedLong;
+	}
 	
+	/*
+	 * Other methods that can be used outside of the object
+	 * to do calculations
+	 */
+	 
 	public double hourToDegree(double h){
 		double htd = h * 15;
 		return htd;
@@ -73,5 +96,6 @@ public class gnomon {
 		double stf = s / 4;
 		return stf;
 	}
-	
 }
+
+
