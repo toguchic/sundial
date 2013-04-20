@@ -73,7 +73,7 @@ public class gnomon {
 		double lngCorrection = stdMeridian[timeZone] - Math.abs(lng);
 		System.out.println("lngCorrection -> " + lngCorrection);
 		for(int i = 0; i < degreeArray.length; i++){
-			degreeArray[i] = degreeArray[i] + lngCorrection;
+			degreeArray[i] = degreeArray[i] - lngCorrection;
 		}
 	}
 	
