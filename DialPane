@@ -1,0 +1,38 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.awt.print.*;
+
+public class DialPane extends JFrame{
+
+  
+	public DialPane(){
+		setTitle("Sundial");
+		setSize (1000, 700);
+		setVisible(true);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	}
+	
+	public void paint (Graphics dial){
+		//Graphics2D dial2 = (Graphics2D) dial; 
+		
+		dial.drawLine(560, 560, 0, 0);
+		dial.drawLine(460, 560, 0, 0);
+		dial.drawLine(360, 560, 0, 0);
+		dial.drawArc(50,60,900,600,0,180);
+	}
+	
+	
+
+	
+	public static void main(String[] args){
+		DialPane d = new DialPane();
+	}
+	
+	
+	
+	
+	
+	
+}
+	
