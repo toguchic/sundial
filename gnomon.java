@@ -1,9 +1,11 @@
+package sundial;
 import java.util.*;
 
 //TEST GIT UPDATE
 public class gnomon {
 	
-	double [] degreeArray = new double [7];
+	private double [] degreeArray = new double [7];
+	private int [] stdMeridian = {-135, 75, 90, 105, 150};
 	
 	public gnomon(){
 		/*
@@ -25,11 +27,11 @@ public class gnomon {
 	 *  @param lng longitude of the place the sundial is located to calculate time correction
 	 *  @return double array of degrees
 	 */
-	public double [] calculateTime(double lat, double lng){
+	public double [] calculateTime(double lat, double lng, int timeZone){
 		for(int h = 6; h <= 12; h++){
 			degreeArray[h-6] = calculate(lat, h , 0);
 		}
-		
+		longitudeCorrection(lng, timeZone);
 		return degreeArray;
 	}
 	
@@ -67,9 +69,12 @@ public class gnomon {
 	}
 	
 	
-	private double LongitudeCorrection(double lng){
-		double correctedLong = 90 - lng;
-		return correctedLong;
+	private void longitudeCorrection(double lng, int timeZone){
+		double lngCorrection = stdMeridian[timeZone] - Math.abs(lng);
+		System.out.println("lngCorrection -> " + lngCorrection);
+		for(int i = 0; i < degreeArray.length; i++){
+			degreeArray[i] = degreeArray[i] + lngCorrection;
+		}
 	}
 	
 	/*
