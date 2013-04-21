@@ -2,36 +2,45 @@
 GUI for input of Date, Longitude, and Latitude
 Source: http://www.dreamincode.net/forums/topic/17705-basic-gui-concepts/
 *********/
-
 import java.awt.*;
 import javax.swing.*;
+
 import java.awt.event.*;
 
 public class Gui extends JFrame
 {
-  private static final int WIDTH = 400;
+	private static final int WIDTH = 400;
 	private static final int HEIGHT = 200;
 	
-	private JLabel dateL, latL, longL;
-	private JTextField dateTF, latTF, longTF;
+	private JLabel monthL, dayL, yearL, timeZoneL, latL, longL;
+	private JTextField monthTF, dayTF, yearTF, timeZoneTF, latTF, longTF;
 	private JButton submitB, exitB;
+
+	
 	
 	
 	//Button handlers:
 	private SubmitButtonHandler sbHandler;
 	private ExitButtonHandler ebHandler;
 	
+	
 	public Gui()
 	{
-		dateL = new JLabel("Date: ", SwingConstants.CENTER);
+		monthL = new JLabel("Month: ", SwingConstants.CENTER);
+		dayL = new JLabel("Day: ", SwingConstants.CENTER);
+		yearL = new JLabel("Year: ", SwingConstants.CENTER);
+		timeZoneL = new JLabel("Time Zone: ", SwingConstants.CENTER);
 		latL = new JLabel("Latitude: ", SwingConstants.CENTER);
 		longL = new JLabel("Longitude: ", SwingConstants.CENTER);
 		
-		dateTF = new JTextField(10);
+		monthTF = new JTextField(10);
+		dayTF = new JTextField(10);
+		yearTF = new JTextField(10);
+		timeZoneTF = new JTextField(15);
 		latTF = new JTextField(10);
 		longTF = new JTextField(10);
 		
-		//SPecify handlers for each button and add (register) ActionListeners to each button.
+		//Specify handlers for each button and add (register) ActionListeners to each button.
 		submitB = new JButton("Submit");
 		sbHandler = new SubmitButtonHandler();
 		submitB.addActionListener(sbHandler);
@@ -39,13 +48,23 @@ public class Gui extends JFrame
 		ebHandler = new ExitButtonHandler();
 		exitB.addActionListener(ebHandler);
 		
+		
 		setTitle("Sundial Input");
 		Container pane = getContentPane();
 		pane.setLayout(new GridLayout(4, 2));
 		
+	
+		
+		
 		//Add things to the pane in the order you want them to appear (left to right, top to bottom)
-		pane.add(dateL);
-		pane.add(dateTF);
+		pane.add(monthL);
+		pane.add(monthTF);
+		pane.add(dayL);
+		pane.add(dayTF);
+		pane.add(yearL);
+		pane.add(yearTF);
+		pane.add(timeZoneL);
+		pane.add(timeZoneTF);
 		pane.add(longL);
 		pane.add(longTF);
 		pane.add(latL);
@@ -58,22 +77,32 @@ public class Gui extends JFrame
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
-	//Where input will be used to calculate time. 
+
 	private class SubmitButtonHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			double longitude, latitude, date;
+			double longitude, latitude;
+			int m, d, y;
+			String tzone;
 			
 			longitude = Double.parseDouble(longTF.getText()); //We use the getText & setText methods to manipulate the data entered into those fields.
 			latitude = Double.parseDouble(latTF.getText());
-			//date = Integer.parseInt(dateTF.getText());
+			m = Integer.parseInt(monthTF.getText());
+			d = Integer.parseInt(dayTF.getText());
+			y = Integer.parseInt(yearTF.getText());
+			tzone = timeZoneTF.getText();
 			
-			//This is temporary until other codes are finished
-			date = longitude * latitude;
-			dateTF.setText("" + date);
+			gnomon g = new gnomon();
+			
+			g.calculateTime(latitude, longitude, tZone); 
+			EOT eot = new EOT();
+			eot.EqOfT(m, d, y);
+			
+			//double [] fromGnomon = g.calculateTime(latitude,longitude, tzone);
 		
 		}
+		
 	}
 	
 	public class ExitButtonHandler implements ActionListener
@@ -82,11 +111,13 @@ public class Gui extends JFrame
 		{
 			System.exit(0);
 		}
+		
 	}
 	
 	public static void main(String[] args)
 	{
-		Gui rectObj = new Gui();
+		Gui input = new Gui();
+		
 	}
 	
 }
