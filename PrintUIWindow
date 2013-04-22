@@ -67,10 +67,15 @@ public class PrintUIWindow  extends JFrame implements Printable, ActionListener{
 		
 		dial.drawLine(95,283,340,340);//7AM
 		dial.drawLine(120, 226, 340,340);//8AM
-		dial.drawLine(155, 170, 340, 340);//9AM
+		dial.drawLine(160, 170, 340, 340);//9AM
 		dial.drawLine(210,125,340,340);//10AM
 		dial.drawLine(270,100, 340,340);//11AM
 		
+		dial.drawLine(585,283,340,340);//5PM
+		dial.drawLine(560, 226, 340, 340);//4PM
+		dial.drawLine(520, 170, 340, 340);//3PM
+		dial.drawLine(470,125,340,340);//2PM
+		dial.drawLine(410, 100, 340, 340);//1PM
 		
     	
 	}
