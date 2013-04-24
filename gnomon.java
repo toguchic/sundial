@@ -36,6 +36,25 @@ public class gnomon {
 	}
 	
 	/*
+	 * Takes in a longitude and a String timezone and returns the degree correction
+	 * 
+	 * @param lng longitude
+	 * @param timezone timezone entered by the user
+	 * @returns correction in degrees
+	 */
+	public double longitudeCorrection(double lng, String timeZone){
+		int stdMeridianIndex = 0;
+		for(int i = 0; i < stdMeridianLocations.length; i++){
+			if(timeZone.equalsIgnoreCase(stdMeridianLocations[i])){
+				stdMeridianIndex = i;
+				System.out.println("Calculating for timezone: " + stdMeridianLocations[i]);
+			}
+		}
+		return stdMeridian[stdMeridianIndex] - Math.abs(lng);
+	}
+	
+	
+	/*
 	 * Takes in latitude, hour, and minutes and returns the angle 
 	 * of the hour line with respect to the gnomon
 	 * 
@@ -68,18 +87,6 @@ public class gnomon {
 		return 180 - minToDegree(m);
 	}
 	
-	
-	public void longitudeCorrection(double lng, String timeZone){
-		int stdMeridianIndex = 0;
-		for(int i = 0; i < stdMeridianLocations.length; i++){
-			if(timeZone.equalsIgnoreCase(stdMeridianLocations[i])){
-				stdMeridianIndex = i;
-				System.out.println("Calculating for timezone: " + stdMeridianLocations[i]);
-			}
-		}
-		double lngCorrection = stdMeridian[stdMeridianIndex] - Math.abs(lng);
-		System.out.println("lngCorrection -> " + lngCorrection);
-	}
 	
 	/*
 	 * Other methods that can be used outside of the object
