@@ -28,7 +28,7 @@ public class gnomon {
 	 *  @param lng longitude of the place the sundial is located to calculate time correction
 	 *  @return double array of degrees
 	 */
-	public double [] calculateTime(double lat, double lng){
+	public double [] calculateTime(double lat){
 		for(int h = 6; h <= 12; h++){
 			degreeArray[h-6] = calculate(lat, h , 0);
 		}
