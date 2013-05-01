@@ -1,11 +1,11 @@
-/******************************************
+/********************************
  * User Interface where users can input the Month, Day, Year,
  * Latitude, Longitude, and Time Zone. 
  * 
  * Sources include:
  * http://www.dreamincode.net/forums/topic/17705-basic-gui-concepts/
  * 
- ******************************/
+ */
 
 
 
@@ -183,21 +183,12 @@ public class DialPane extends JFrame {
 		
 		double longitude, latitude, hour, eotAdjust, timeZoneAdjust;
 		double [] hourAngle = new double [7];
-		int m =0 , d= 0, yr=0;
+		int m , d, yr, x, y;
 		String tzone = null;
 		//Create instance of gnomon
 		gnomon gMon = new gnomon();
 				
-		//Assigns data that is entered into the fields.
-		
-		longitude = Double.parseDouble(longTF.getText()); 
-			
-		//}catch(NumberFormatException e){
-			//check = false;
-			//g.setColor(Color.black);
-			//g.drawString("Please use correct input format", 340,90);
-			//JOptionPane.showMessageDialog(null, "ERROR", "Error window", JOptionPane.ERROR_MESSAGE);
-		//}
+
 		
 		longitude = Double.parseDouble(longTF.getText()); 
 		latitude = Double.parseDouble(latTF.getText());
@@ -205,10 +196,7 @@ public class DialPane extends JFrame {
 		d = Integer.parseInt(dayTF.getText());
 		yr = Integer.parseInt(yearTF.getText());
 		tzone = timeZoneTF.getText();
-		latitude = Double.parseDouble(latTF.getText());
 		
-		
-	
 		
 		//Calculates the Equation of Time given the date
 		EOT eot = new EOT();
@@ -228,23 +216,35 @@ public class DialPane extends JFrame {
 		g.drawArc(90,90,500,500,0,180);
 		
 		
-		//Draws the hour lines
+		//Draws the AM hour lines
 		for(int i = 0; i <= 6 ; i++){
-			int x = (int) (340 - 250 * Math.cos(Math.toRadians(hourAngle[i])) - eotAdjust + timeZoneAdjust);
+			x = (int) (340 - 250 * Math.cos(Math.toRadians(hourAngle[i])));
+			x = x - (int) eotAdjust + (int) timeZoneAdjust;
 			System.out.println("x -> " + x);
-			int y = (int) (340 - 250 * Math.sin(Math.toRadians(hourAngle[i])) - eotAdjust + timeZoneAdjust);
+			y = (int) (340 - 250 * Math.sin(Math.toRadians(hourAngle[i])));
+			y = y - (int) eotAdjust + (int) timeZoneAdjust;
 			System.out.println("y-> " + y);
 			g.drawLine(x, y, 340, 340);
-			x = (int) (340 + 250 * Math.cos(Math.toRadians(hourAngle[i])) - eotAdjust + timeZoneAdjust);
+			
+		}
+		
+		//Draws the PM hour lines
+		for(int i = 1; i <= 6 ; i++){
+			y = (int) (340 - 250 * Math.sin(Math.toRadians(hourAngle[i])));
+			y = y - (int) eotAdjust + (int) timeZoneAdjust;
+			System.out.println("y-> " + y);
+			x = (int) (340 + 250 * Math.cos(Math.toRadians(hourAngle[i])));
+			x = x + (int) eotAdjust - (int) timeZoneAdjust;
 			g.drawLine(x, y, 340, 340);
 		}
 		
-	
 		
-		//Creates Gnomon based on the Latitude
+		
+		//Creates Gnomon coordinates based on the Latitude
 		int gx = (int) (340 - 250 * Math.cos(Math.toRadians(latitude)));
 		int gy = (int) (590 - 250 * Math.sin(Math.toRadians(latitude)));
 		
+		//Draws Gnomon 
 		g.drawLine(90,590,340,590);
 		g.drawLine(340, 590, gx, gy);
 		g.drawLine(gx,gy,90,590);
