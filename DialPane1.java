@@ -182,9 +182,9 @@ public class DialPane1 extends JFrame {
 		public void paint(Graphics g){
 		g.drawArc(90,90,500,500,0,180);//Semi Circle
 		
-		double longitude, latitude, hour, gnomonAngle, eotAdjust, timeZoneAdjust;
+		double longitude, latitude, hour, eotAdjust, timeZoneAdjust;
 		double [] hourAngle = new double [7];
-		int m , d, yr;
+		int m , d, yr, x, y;
 		String tzone;
 		//boolean check = true;
 		//Create instance of gnomon
@@ -234,13 +234,13 @@ public class DialPane1 extends JFrame {
 			}
 		
 		
-		if(timeZoneAdjust == 0){
+		
 	    	Font font = new Font("Arial", Font.PLAIN, 20);
 		    g.setFont(font);
 			g.drawString("Time Zone Not In Program! Please close window", 100, 340);
 			return;
 		}
-		else{
+		
 			//Draws the AM hour lines
 			for(int i = 0; i <= 6 ; i++){
 				x = (int) (340 - 250 * Math.cos(Math.toRadians(hourAngle[i])));
@@ -263,7 +263,7 @@ public class DialPane1 extends JFrame {
 				g.drawLine(x, y, 340, 340);
 			}
 		
-		}
+		
 		
 		
 		
