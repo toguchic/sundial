@@ -6,7 +6,9 @@ package sundial;
  * 
  * Sources include:
  * http://www.dreamincode.net/forums/topic/17705-basic-gui-concepts/
- * 
+ * @ Authors: Chriselle TOguchi, Matt Kanda, Samuel Kim
+ * @ Date: 4/30/2013
+ * @ Version: 1.0
  */
 
 
@@ -107,11 +109,7 @@ public class DialPane1 extends JFrame {
 	   printB = new JButton("Print This Window");
 	   pbHandler = new PrintButtonHandler();
 	   printB.addActionListener(pbHandler);
-			
-			
-		
-	    //JButton printButton = new JButton("Print This Window");
-	   // printButton.addActionListener(new DialPane1(frame));
+
 	    printB.setVisible(true);
 	    buttonCenter.add(printB);
 	 
@@ -120,9 +118,6 @@ public class DialPane1 extends JFrame {
 	}
 
 	
-	
-
-	    
 	  
 	 
 	private class SubmitButtonHandler implements ActionListener
@@ -134,7 +129,6 @@ public class DialPane1 extends JFrame {
 			if(e.getSource() instanceof JButton){
 				Printpage();
 			}
-		
 		}
 		
 	}
@@ -186,21 +180,10 @@ public class DialPane1 extends JFrame {
 		double [] hourAngle = new double [7];
 		int m , d, yr, x, y;
 		String tzone;
-		//boolean check = true;
-		//Create instance of gnomon
+		//Create instance of hourLine
 		hourLine gMon = new hourLine();
 				
 		//Assigns data that is entered into the fields.
-		
-			
-			
-		//}catch(NumberFormatException e){
-			//check = false;
-			//g.setColor(Color.black);
-			//g.drawString("Please use correct input format", 340,90);
-			//JOptionPane.showMessageDialog(null, "ERROR", "Error window", JOptionPane.ERROR_MESSAGE);
-		//}
-		
 		try{
 			longitude = Double.parseDouble(longTF.getText()); 
 			latitude = Double.parseDouble(latTF.getText());
