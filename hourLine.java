@@ -68,9 +68,6 @@ public class hourLine{
 	 */
 	private double calculate(double lat, int h, int m){
 		double d = Math.tan(Math.toRadians(calculateArc(h,m))) * Math.sin(Math.toRadians(lat));
-	//	System.out.println("calculateArc is reporting -> " + calculateArc(h,m));
-	//	System.out.println("Math.tan is reporting     -> " + Math.tan(Math.toRadians(calculateArc(h,m))));
-	//	System.out.println("Math.sin is reporting     -> " + Math.sin(Math.toRadians(lat)));
 		double radians = Math.atan(d);
 		double degree = Math.toDegrees(radians);
 		return degree;
