@@ -1,0 +1,75 @@
+package sundial;
+
+import static org.junit.Assert.*;
+import sundial.gnomon;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+public class gnomonTest {
+
+  public gnomonTest() {
+	}
+
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+	}
+
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+	}
+
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
+
+
+	@Test
+	public void testCalculateTime() {
+		
+	}
+	
+	@Test
+	public void testCalculate() {
+		double cal = gnomon.calculate(20.5, 2, 34);
+		assertEquals(-15.566110503459702,cal,.00001);
+	}
+
+	@Test
+	public void testLongitudeCorrection() {
+		double longitude = gnomon.longitudeCorrection(200,"Hawaii");
+		assertEquals(-50.0,longitude,.00001);
+	}
+
+	@Test
+	public void testHourToDegree() {
+		double hourDegree = gnomon.hourToDegree(2);
+		assertEquals(30,hourDegree,.00001);
+	}
+
+	@Test
+	public void testMinToDegree() {
+		double minDegree = gnomon.minToDegree(40);
+		assertEquals(10,minDegree,.00001);
+	}
+
+	@Test
+	public void testMinToFt() {
+		double minFeet = gnomon.minToFt(2);
+		assertEquals(30,minFeet,.00001);
+	}
+
+	@Test
+	public void testSecToFt() {
+		double secFt = gnomon.secToFt(4);
+		assertEquals(1,secFt,.00001);
+	}
+
+}
