@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class EOTTest {
 
-  public EOTTest() {
+	public EOTTest() {
 	}
 
 	@BeforeClass
@@ -31,14 +31,27 @@ public class EOTTest {
 
 	@Test
 	public void testEqOfT() {
-		double time = EOT.EqOfT(2,14,2013);
-		assertEquals(-3.647900754460519,time,.00001);
+		// testing for 2/14/2013
+		double time = EOT.EqOfT(2,14,2013) / 4;
+		assertEquals(-3.647900754460519,time,0);
+		//testing for 1/1/2013
+		time = EOT.EqOfT(1, 1, 2013) / 4;
+		assertEquals(-0.9262945808490173,time,0);
+		//testing for 12/25/0000
+		time = EOT.EqOfT(12, 25, 0000) / 4;
+		assertEquals(-0.24000308260607078,time,0);
 	}
 
 	@Test
 	public void testDayOfYear() {
+		// testing for 2/14/2013
 		double days = EOT.dayOfYear(2,14,2013);
-		assertEquals(45,days,0.001);
+		assertEquals(45,days,0);
+		// testing for 10/31/2013
+		days = EOT.dayOfYear(10,31,2013);
+		assertEquals(304,days,0);
+		// testing for 4/30/2013
+		days = EOT.dayOfYear(4,30,2013);
+		assertEquals(120.0,days,0);
 	}
-
 }
