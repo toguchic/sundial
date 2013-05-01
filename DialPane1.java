@@ -1,3 +1,5 @@
+package sundial;
+
 /********************************
  * User Interface where users can input the Month, Day, Year,
  * Latitude, Longitude, and Time Zone. 
@@ -17,7 +19,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.print.*;
 
-public class DialPane extends JFrame {
+public class DialPane1 extends JFrame {
   
 	
 	private static final int WIDTH = 400;
@@ -35,7 +37,7 @@ public class DialPane extends JFrame {
 	
 	
 	
-	public DialPane()
+	public DialPane1()
 	{
 		monthL = new JLabel("Month: ", SwingConstants.CENTER);
 		dayL = new JLabel("Day: ", SwingConstants.CENTER);
@@ -89,7 +91,7 @@ public class DialPane extends JFrame {
 	}
 	
 	JFrame frameToPrint;
-	public DialPane(JFrame f){
+	public DialPane1(JFrame f){
 		frameToPrint = f;
 	}
 	
@@ -109,7 +111,7 @@ public class DialPane extends JFrame {
 			
 		
 	    //JButton printButton = new JButton("Print This Window");
-	   // printButton.addActionListener(new DialPane(frame));
+	   // printButton.addActionListener(new DialPane1(frame));
 	    printB.setVisible(true);
 	    buttonCenter.add(printB);
 	 
@@ -182,15 +184,15 @@ public class DialPane extends JFrame {
 		
 		double longitude, latitude, hour, gnomonAngle, eotAdjust, timeZoneAdjust;
 		double [] hourAngle = new double [7];
-		int m =0 , d= 0, yr=0;
-		String tzone = null;
+		int m , d, yr;
+		String tzone;
 		//boolean check = true;
 		//Create instance of gnomon
-		gnomon gMon = new gnomon();
+		hourLine gMon = new hourLine();
 				
 		//Assigns data that is entered into the fields.
 		
-			longitude = Double.parseDouble(longTF.getText()); 
+			
 			
 		//}catch(NumberFormatException e){
 			//check = false;
@@ -199,13 +201,21 @@ public class DialPane extends JFrame {
 			//JOptionPane.showMessageDialog(null, "ERROR", "Error window", JOptionPane.ERROR_MESSAGE);
 		//}
 		
-		longitude = Double.parseDouble(longTF.getText()); 
-		latitude = Double.parseDouble(latTF.getText());
-		m = Integer.parseInt(monthTF.getText());
-		d = Integer.parseInt(dayTF.getText());
-		yr = Integer.parseInt(yearTF.getText());
-		tzone = timeZoneTF.getText();
-		latitude = Double.parseDouble(latTF.getText());
+		try{
+			longitude = Double.parseDouble(longTF.getText()); 
+			latitude = Double.parseDouble(latTF.getText());
+			m = Integer.parseInt(monthTF.getText());
+			d = Integer.parseInt(dayTF.getText());
+			yr = Integer.parseInt(yearTF.getText());
+			tzone = timeZoneTF.getText();
+			
+		}
+		catch(NumberFormatException e){
+	    	Font font = new Font("Arial", Font.PLAIN, 20);
+		    g.setFont(font);
+			g.drawString("Input Error! Please close window", 200, 340);
+			return;
+		}
 		
 		
 	
@@ -218,75 +228,70 @@ public class DialPane extends JFrame {
 		
 		//Loop through array and transfer to hourAngle array
 			for(int i = 6; i <= 12 ; i++){
-				hour = gMon.calculateTime(latitude, longitude) [i-6];
+				hour = gMon.calculateTime(latitude) [i-6];
 				hourAngle[i-6] = hour;
 			//System.out.println("Calculated Hour " + i + " is: " + hourAngle[i-6]);
 			}
 		
 		
-		
+		if(timeZoneAdjust == 0){
+	    	Font font = new Font("Arial", Font.PLAIN, 20);
+		    g.setFont(font);
+			g.drawString("Time Zone Not In Program! Please close window", 100, 340);
+			return;
+		}
+		else{
 		//Draws hour lines
-		for(int i = 0; i <= 6 ; i++){
-			int x = (int) (340 - 250 * Math.cos(Math.toRadians(hourAngle[i])) - eotAdjust + timeZoneAdjust);
-			System.out.println("x -> " + x);
-			int y = (int) (340 - 250 * Math.sin(Math.toRadians(hourAngle[i])) - eotAdjust + timeZoneAdjust);
-			System.out.println("y-> " + y);
-			g.drawLine(x, y, 340, 340);
-			x = (int) (340 + 250 * Math.cos(Math.toRadians(hourAngle[i])) - eotAdjust + timeZoneAdjust);
-			g.drawLine(x, y, 340, 340);
+			for(int i = 0; i <= 6 ; i++){
+				int x = (int) (340 - 250 * Math.cos(Math.toRadians(hourAngle[i])) - eotAdjust + timeZoneAdjust);
+				System.out.println("x -> " + x);
+				int y = (int) (340 - 250 * Math.sin(Math.toRadians(hourAngle[i])) - eotAdjust + timeZoneAdjust);
+				System.out.println("y-> " + y);
+				g.drawLine(x, y, 340, 340);
+				x = (int) (340 + 250 * Math.cos(Math.toRadians(hourAngle[i])) - eotAdjust + timeZoneAdjust);
+				g.drawLine(x, y, 340, 340);
+			}
 		}
 		
 		
 		
-		//Creates Gnomon
-		//Polygon poly = new Polygon();
-		int gx = (int) (590 - 200 * Math.cos(Math.toRadians(latitude)));
-		int gy = (int) (590 - 200 * Math.sin(Math.toRadians(latitude)));
 		
-		System.out.println("x cos: " + 250 * Math.cos(Math.toRadians(latitude)));
-		System.out.println("y sin: " + Math.sin(Math.toRadians(latitude)));
-		System.out.println("x axis: " + gx);
-		System.out.println("y axis: " + gy);
-		
-		/**Hawaii Timezone gnomon
-		g.drawLine(gx,gy,400,400);
-	    g.drawLine(100, 500,gx,gy);
-		g.drawLine(400,400,100,500);
-		**/
-		
-		/**Denver Timezone Gnomon
-		g.drawLine(340,340,340,590);
-		g.drawLine(gx + 64,gy-122,340,590);
-		g.drawLine(340, 340, 500, 340);
-		**/
-		
-		
-		double equalangles = gMon.gnomonAngles(latitude);
-		System.out.println("Equalangles-> " + equalangles);
-		
-		double gSide1 = gMon.gnomonSides(250, latitude, equalangles);
-		int gSideInt = (int) gSide1;
-		System.out.println("Gnomon Sides-> " + gSideInt);
-		
-		double gSide2 = gMon.gnomonSides(gSide1, latitude, equalangles);
-		int gSide2Int = (int) gSide2;
-		System.out.println("Gnomon Sides-> " + gSide2Int);
-		
-		
-		g.drawLine(340,340,340,590);
-		g.drawLine(340, 590, 340-gSideInt, 590-gSideInt);
-		g.drawLine(340, 340, 340-gSideInt, 590-gSideInt);
-		//g.drawLine(340, 340, 500, 350);
-		//g.drawLine(gx ,gy,340,590);
-		
-		//poly.addPoint(340, 400);
-		//poly.addPoint(80,340);
-		//poly.addPoint(340, gy);
-		
-		//g.drawPolygon(poly);
-		
-		//System.out.println("Longitude Correction: " + gMon.longitudeCorrection(longitude, tzone));
-		
+		int gx = (int) (340 - 250 * Math.cos(Math.toRadians(latitude)));
+		  int gy = (int) (590 - 250 * Math.sin(Math.toRadians(latitude)));
+		  
+		  System.out.println("x cos: " + 250 * Math.cos(Math.toRadians(latitude)));
+		  System.out.println("y sin: " + Math.sin(Math.toRadians(latitude)));
+		  System.out.println("x axis: " + gx);
+		  System.out.println("y axis: " + gy);
+		  
+		  /**Hawaii Timezone gnomon
+		  g.drawLine(gx,gy,400,400);
+		     g.drawLine(100, 500,gx,gy);
+		  g.drawLine(400,400,100,500);
+		  **/
+		  
+		  /**Denver Timezone Gnomon
+		  g.drawLine(340,340,340,590);
+		  g.drawLine(gx + 64,gy-122,340,590);
+		  g.drawLine(340, 340, 500, 340);
+		  
+		  
+		  
+		  double equalangles = gMon.gnomonAngles(latitude);
+		  System.out.println("Equalangles-> " + equalangles);
+		  
+		  double gSide1 = gMon.gnomonSides(250, latitude, equalangles);
+		  int gSideInt = (int) gSide1;
+		  System.out.println("Gnomon Sides-> " + gSideInt);
+		  
+		  double gSide2 = gMon.gnomonSides(gSide1, latitude, equalangles);
+		  int gSide2Int = (int) gSide2;
+		  System.out.println("Gnomon Sides-> " + gSide2Int);
+		  */
+		  
+		  g.drawLine(90,590,340,590);
+		  g.drawLine(340, 590, gx, gy);
+		  g.drawLine(gx,gy,90,590);
 
 		}
 	}
@@ -295,7 +300,7 @@ public class DialPane extends JFrame {
 	
 	public static void main(String[] args)
 	{
-		DialPane input = new DialPane();
+		DialPane1 input = new DialPane1();
 		
 	}
 	
