@@ -241,57 +241,42 @@ public class DialPane1 extends JFrame {
 			return;
 		}
 		else{
-		//Draws hour lines
+			//Draws the AM hour lines
 			for(int i = 0; i <= 6 ; i++){
-				int x = (int) (340 - 250 * Math.cos(Math.toRadians(hourAngle[i])) - eotAdjust + timeZoneAdjust);
+				x = (int) (340 - 250 * Math.cos(Math.toRadians(hourAngle[i])));
+				x = x - (int) eotAdjust + (int) timeZoneAdjust;
 				System.out.println("x -> " + x);
-				int y = (int) (340 - 250 * Math.sin(Math.toRadians(hourAngle[i])) - eotAdjust + timeZoneAdjust);
+				y = (int) (340 - 250 * Math.sin(Math.toRadians(hourAngle[i])));
+				y = y - (int) eotAdjust + (int) timeZoneAdjust;
 				System.out.println("y-> " + y);
 				g.drawLine(x, y, 340, 340);
-				x = (int) (340 + 250 * Math.cos(Math.toRadians(hourAngle[i])) - eotAdjust + timeZoneAdjust);
+			
+			}
+		
+			//Draws the PM hour lines
+			for(int i = 1; i <= 6 ; i++){
+				y = (int) (340 - 250 * Math.sin(Math.toRadians(hourAngle[i])));
+				y = y - (int) eotAdjust + (int) timeZoneAdjust;
+				System.out.println("y-> " + y);
+				x = (int) (340 + 250 * Math.cos(Math.toRadians(hourAngle[i])));
+				x = x + (int) eotAdjust - (int) timeZoneAdjust;
 				g.drawLine(x, y, 340, 340);
 			}
+		
 		}
 		
 		
 		
 		
+		//Creates Gnomon coordinates based on the Latitude
 		int gx = (int) (340 - 250 * Math.cos(Math.toRadians(latitude)));
-		  int gy = (int) (590 - 250 * Math.sin(Math.toRadians(latitude)));
-		  
-		  System.out.println("x cos: " + 250 * Math.cos(Math.toRadians(latitude)));
-		  System.out.println("y sin: " + Math.sin(Math.toRadians(latitude)));
-		  System.out.println("x axis: " + gx);
-		  System.out.println("y axis: " + gy);
-		  
-		  /**Hawaii Timezone gnomon
-		  g.drawLine(gx,gy,400,400);
-		     g.drawLine(100, 500,gx,gy);
-		  g.drawLine(400,400,100,500);
-		  **/
-		  
-		  /**Denver Timezone Gnomon
-		  g.drawLine(340,340,340,590);
-		  g.drawLine(gx + 64,gy-122,340,590);
-		  g.drawLine(340, 340, 500, 340);
-		  
-		  
-		  
-		  double equalangles = gMon.gnomonAngles(latitude);
-		  System.out.println("Equalangles-> " + equalangles);
-		  
-		  double gSide1 = gMon.gnomonSides(250, latitude, equalangles);
-		  int gSideInt = (int) gSide1;
-		  System.out.println("Gnomon Sides-> " + gSideInt);
-		  
-		  double gSide2 = gMon.gnomonSides(gSide1, latitude, equalangles);
-		  int gSide2Int = (int) gSide2;
-		  System.out.println("Gnomon Sides-> " + gSide2Int);
-		  */
-		  
-		  g.drawLine(90,590,340,590);
-		  g.drawLine(340, 590, gx, gy);
-		  g.drawLine(gx,gy,90,590);
+		int gy = (int) (590 - 250 * Math.sin(Math.toRadians(latitude)));
+		
+		//Draws Gnomon 
+		g.drawLine(90,590,340,590);
+		g.drawLine(340, 590, gx, gy);
+		g.drawLine(gx,gy,90,590);
+
 
 		}
 	}
