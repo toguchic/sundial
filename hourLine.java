@@ -87,22 +87,6 @@ public class hourLine{
 		return 180 - minToDegree(m);
 	}
 	
-	 public double gnomonAngles(double lat){
-		  double splitangles = (180 - lat)/2; 
-		  return splitangles;
-		 }
-		 
-	 public double gnomonSides(double side1, double angle1, double angle2){
-		  double angle1rad = (Math.sin(Math.toRadians(angle1)));
-		  double angle1degree = Math.toDegrees(angle1rad);
-		  System.out.println("Angle 1 -> " + angle1degree);
-		  double angle2rad = (Math.sin(Math.toRadians(angle2)));
-		  double angle2degree = Math.toDegrees(angle2rad);
-		  System.out.println("Angle 2 -> " + angle2degree);
-		  double side = (side1 * angle1degree)/angle2degree;
-		  
-		  return side;
-	 }
 	
 	/*
 	 * Other methods that can be used outside of the object
