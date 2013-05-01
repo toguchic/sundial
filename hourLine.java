@@ -1,7 +1,16 @@
+/**********************************
+ * Calculates hour lines for the sundial
+ * Calculates the longitude correction using standard meridiam
+ * 
+ * 
+ * @ Authors: Chriselle TOguchi, Matt Kanda, Samuel Kim
+ * @ Date: 4/30/2013
+ * @ Version: 1.0
+ ****************************/
 package sundial;
 import java.util.*;
 
-//TEST GIT UPDATE
+
 public class hourLine{
 	
 	private double [] degreeArray = new double [7];
@@ -9,16 +18,7 @@ public class hourLine{
 	private String [] stdMeridianLocations = {"Japan", "New York", "Chicago", "Denver", "Hawaii"};
 	
 	public hourLine(){
-		/*
-		 * Equation
-		 * c
-		 * 
-		 * d -> angle which the hour line makes with the gnomon
-		 * t -> time measured from noon in degrees of arc
-		 * phi -> latitude of the place the sundial is located
-		 * 
-		 * 12 noon is 180* of arc
-		 */
+
 	}
 	
 	/*
